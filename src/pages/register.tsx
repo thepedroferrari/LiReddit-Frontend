@@ -1,5 +1,6 @@
 import { Button, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/core';
-import {Formik, Field} from 'formik'
+import {Formik, Form} from 'formik'
+import { Wrapper } from '../components/Wrapper';
 interface registerProps {
 
 }
@@ -7,37 +8,37 @@ interface registerProps {
 
 const Register: React.FC<registerProps> = ({}) => {
   return (
+    <Wrapper variant="small">
     <Formik
-      initialValues={{ name: "Sasuke" }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
+      initialValues={{ username: "", password: "" }}
+      onSubmit={(values) => {
+        console.log(values)
       }}
     >
-      {props => (
-        <form onSubmit={props.handleSubmit}>
-          <Field name="name">
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.name && form.touched.name}>
-                <FormLabel htmlFor="name">First name</FormLabel>
-                <Input {...field} id="name" placeholder="name" />
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          <Button
-            mt={4}
-            variantColor="teal"
-            isLoading={props.isSubmitting}
-            type="submit"
-          >
-            Submit
+      {({values, handleChange, isSubmitting}) => (
+        <Form>
+          <FormControl>
+            <FormLabel htmlFor="username">Username</FormLabel>
+            <Input
+              value={values.username}
+              onChange={handleChange}
+              id="username"
+              placeholder="username"
+            />
+            {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
+            <Button
+              mt={4}
+              variantColor="teal"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Register
           </Button>
-        </form>
+          </FormControl>
+        </Form>
       )}
-    </Formik>
+      </Formik>
+    </Wrapper>
     );
 }
 
