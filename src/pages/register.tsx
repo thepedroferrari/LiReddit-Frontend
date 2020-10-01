@@ -1,15 +1,11 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/core';
+import { Box, Button } from '@chakra-ui/core';
 import { Formik, Form } from 'formik'
 import { Wrapper } from '../components/Wrapper';
 import { InputField } from '../components/InputField';
 import { useRegisterMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
-interface registerProps {
 
-}
-
-
-const Register: React.FC<registerProps> = ({ }) => {
+const Register: React.FC = () => {
   const [, register] = useRegisterMutation()
   return (
     <Wrapper variant="small">
@@ -20,11 +16,10 @@ const Register: React.FC<registerProps> = ({ }) => {
 
           console.log({response})
           if (response.data?.register.errors) {
-            console.log('ERROR!')
+            console.log(toErrorMap(response.data?.register.errors))
             setErrors(toErrorMap(response.data?.register.errors))
           }
 
-          return response;
         }}
       >
         {({ isSubmitting }) => (
@@ -33,6 +28,7 @@ const Register: React.FC<registerProps> = ({ }) => {
               name="username"
               placeholder="username"
               label="Username"
+              autoComplete="username"
             />
             <Box mt={4}>
               <InputField

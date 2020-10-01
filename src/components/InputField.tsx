@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 import { useField } from "formik";
 import {
   FormControl,
@@ -29,7 +29,7 @@ export const InputField: React.FC<InputFieldProps> = ({
     <FormControl isInvalid={Boolean(error)}>
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <InputOrTextarea {...field} {...props} id={field.name} />
-      {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
+      {error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
 };
