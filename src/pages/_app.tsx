@@ -4,7 +4,7 @@ import { cacheExchange, Cache, QueryInput } from '@urql/exchange-graphcache';
 
 import { NavBar } from '../components/NavBar';
 import theme from '../theme'
-import { MeDocument, Query, MeQuery, LoginMutation, RegisterMutation } from '../generated/graphql';
+import { MeDocument, MeQuery, LoginMutation, RegisterMutation } from '../generated/graphql';
 
 function betterUpdateQuery<Result, Query>(
   cache: Cache,
