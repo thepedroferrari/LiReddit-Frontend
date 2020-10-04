@@ -1,12 +1,11 @@
-import { InputHTMLAttributes } from "react";
-import { useField } from "formik";
 import {
   FormControl,
-  FormLabel,
+  FormErrorMessage, FormLabel,
   Input,
-  FormErrorMessage,
-  Textarea,
+  Textarea
 } from "@chakra-ui/core";
+import { useField } from "formik";
+import { InputHTMLAttributes } from "react";
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;

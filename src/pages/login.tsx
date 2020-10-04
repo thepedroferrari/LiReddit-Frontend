@@ -1,9 +1,9 @@
 import { Box, Button } from '@chakra-ui/core';
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 
-import { Wrapper } from '../components/Wrapper';
 import { InputField } from '../components/InputField';
+import { Wrapper } from '../components/Wrapper';
 import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 
