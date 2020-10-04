@@ -1,5 +1,12 @@
-const Index = () => (
-  <div>Hello World</div>
-)
+import { withUrqlClient } from "next-urql"
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { usePostsQuery } from '../generated/graphql';
 
-export default Index
+const Index = () => {
+  const [] = usePostsQuery();
+  return (
+    <div>Hello World</div>
+  )
+}
+
+export default withUrqlClient(createUrqlClient)(Index)
