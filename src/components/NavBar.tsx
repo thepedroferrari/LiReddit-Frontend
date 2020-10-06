@@ -1,14 +1,17 @@
 import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import { useMeQuery } from '../generated/graphql';
+import { isServer } from '../utils/isServer';
 
 export const NavBar: React.FC = () => {
-  const [{ data, fetching }] = useMeQuery()
+  const [{ data, fetching }] = useMeQuery({
+    pause: isServer()
+  })
   let body = null;
-
+  console.log({data, fetching})
   // loading
   fetching
-    ? body = <p>Loading...</p>
+    ? body = null
     : !data?.me
       ? body = (
         <>
@@ -38,3 +41,4 @@ export const NavBar: React.FC = () => {
     </Flex>
   );
 }
+
