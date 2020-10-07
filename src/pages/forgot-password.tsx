@@ -1,35 +1,33 @@
-import { Box, Button, Link, Flex } from '@chakra-ui/core';
+import { Box, Button } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { InputField } from '../components/InputField';
 import { Wrapper } from '../components/Wrapper';
-import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
+import { useForgotPasswordMutation } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import NextLink from 'next/link';
 
 const ForgotPassword: React.FC = () => {
-  const router = useRouter();
-  const [, login] = useLoginMutation();
+  const [complete, setComplete] = useState(false);
+  const [, forgotPassword] = useForgotPasswordMutation();
 
   return (
     <Wrapper variant="small">
       <Formik
-        initialValues={{ usernameOrEmail: "", password: "" }}
-        onSubmit={async (options, { setErrors }) => {
-          const response = await login(options);
-
-          if (response.data?.login.errors) {
-            setErrors(toErrorMap(response.data?.login.errors))
-          } else if (response.data?.login.user) {
-            router.push('/')
-          }
-
+        initialValues={{ email: "" }}
+        onSubmit={async (email) => {
+          await forgotPassword(email);
+          setComplete(true)
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting }) => complete
+          ? (
+            <Box>
+              If that email is registered within our database, it will receive a link to reset password.
+            </Box>
+          )
+          : (
           <Form>
             <Box mt={4}>
               <InputField
