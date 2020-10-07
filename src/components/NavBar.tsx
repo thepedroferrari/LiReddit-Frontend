@@ -29,7 +29,7 @@ export const NavBar: React.FC = () => {
       )
       : body = (
         <Flex>
-          <Box>{data.me.username}</Box>
+          <Box mr={2}>{data.me.username}</Box>
           <Button
             variant="link"
             onClick={() => { logout() }}
