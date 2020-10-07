@@ -56,11 +56,11 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
             {tokenError && (
               <Flex>
                 <Box color='#f00' mr={2}>{tokenError}:</Box>
-                <Link>
-                  <NextLink href="/forgot-password">
+                <NextLink href="/forgot-password">
+                  <Link>
                     Get a new reset token
-                  </NextLink>
-                </Link>
+                  </Link>
+                </NextLink>
               </Flex>
             )}
             <Button
