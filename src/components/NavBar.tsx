@@ -12,7 +12,6 @@ export const NavBar: React.FC = () => {
     pause: isServer()
   })
   let body = null;
-  console.log({data, fetching})
   // loading
   fetching
     ? body = null

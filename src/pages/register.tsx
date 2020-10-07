@@ -20,9 +20,7 @@ const Register: React.FC = () => {
         onSubmit={async (options, { setErrors }) => {
           const response = await register({options});
 
-          console.log({response})
           if (response.data?.register.errors) {
-            console.log(toErrorMap(response.data?.register.errors))
             setErrors(toErrorMap(response.data?.register.errors))
           } else if (response.data?.register.user) {
             router.push('/')
