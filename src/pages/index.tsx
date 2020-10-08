@@ -12,15 +12,15 @@ const Index = () => {
     <div>Hello World</div>
       {!data
         ? <p>loading...</p>
-        : data.posts.map(p => (
-          <article key={p.id}>
+        : data.posts.map(post => (
+          <article key={post.id}>
             <header>
-              <h1>{p.title}</h1>
+              <h1>{post.title}</h1>
               <p>
-                Created at: <time>{p.createdAt}</time>
+                Created at: <time>{post.createdAt}</time>
               </p>
               <p>
-                Updated at: <time>{p.updatedAt}</time>
+                Updated at: <time>{post.updatedAt}</time>
               </p>
             </header>
           </article>
