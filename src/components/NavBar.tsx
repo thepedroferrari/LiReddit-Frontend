@@ -40,7 +40,7 @@ export const NavBar: React.FC = () => {
       );
 
   return (
-    <Flex bg="#ffd500" p={4}>
+    <Flex bg="#ffd500" p={4} zIndex={1} position="sticky" top={0}>
       <NextLink href="/">
         <Link mr={2}>Logo</Link>
       </NextLink>
