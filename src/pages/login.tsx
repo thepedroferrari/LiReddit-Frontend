@@ -24,7 +24,11 @@ const Login: React.FC = () => {
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data?.login.errors))
           } else if (response.data?.login.user) {
-            router.push('/')
+            // Check if we have a single next route query param
+            router.push(typeof router.query.next === "string"
+              ? router.query.next
+              : '/'
+            )
           }
 
         }}
