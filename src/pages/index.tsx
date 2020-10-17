@@ -1,16 +1,28 @@
-import { withUrqlClient } from "next-urql"
-import { createUrqlClient } from '../utils/createUrqlClient';
-import { usePostsQuery } from '../generated/graphql';
-import { Layout } from '../components/Layout';
-import { Stack, Box, Heading, Text, Flex, Button } from '@chakra-ui/core';
+import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/core';
+import { withUrqlClient } from "next-urql";
 import NextLink from 'next/link';
+import { useCallback, useState } from 'react';
+
+import { Layout } from '../components/Layout';
+import { usePostsQuery } from '../generated/graphql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Index = () => {
-  const [{ data, fetching }] = usePostsQuery({
-    variables: {
-      limit: 10
-    }
-  });
+  const [variables, setVariables] = useState({
+    limit: 10,
+    cursor: null as null | number
+  })
+
+  const [{ data, fetching }] = usePostsQuery({ variables });
+
+  const handlePagination = useCallback(() => {
+    if (!data || fetching) return;
+
+    setVariables({
+      limit: variables.limit,
+      cursor: Number(data.posts[data?.posts.length - 1].createdAt)
+    })
+  }, [])
 
   return (
     <Layout>
