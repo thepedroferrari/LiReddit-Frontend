@@ -1,8 +1,7 @@
 query Posts($limit: Int!, $cursor: Float) {
   posts(cursor: $cursor, limit: $limit) {
     id
-    createdAt
-    updatedAt
     title
+    excerpt
   }
 }
