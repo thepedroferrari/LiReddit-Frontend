@@ -47,7 +47,7 @@ const Index = () => {
           </Stack>
         )
       }
-      {data && <Flex><Button m="auto">Load more</Button></Flex>}
+      {data && <Flex><Button m="auto" onClick={handlePagination}>Load more</Button></Flex>}
     </Layout>
   )
 }

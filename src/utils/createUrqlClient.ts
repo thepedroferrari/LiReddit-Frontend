@@ -1,6 +1,6 @@
 import { cacheExchange, Resolver } from '@urql/exchange-graphcache';
 import Router from 'next/router';
-import { dedupExchange, Exchange, fetchExchange } from "urql";
+import { dedupExchange, Exchange, fetchExchange, stringifyVariables } from "urql";
 import { pipe, tap } from 'wonka';
 
 import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation } from '../generated/graphql';
@@ -24,11 +24,14 @@ const cursorPagination = (): Resolver => {
   return (_parent, fieldArgs, cache, info) => {
     const { parentKey: entityKey, fieldName } = info;
     const allFields = cache.inspectFields(entityKey);
-    console.log(allFields)
 
     const fieldInfos = allFields.filter(info => info.fieldName === fieldName);
     const size = fieldInfos.length;
     if (size === 0) return undefined;
+
+    const fieldKey = `${fieldName}(${stringifyVariables(fieldArgs)})`
+    const isItInTheCache = cache.resolveFieldByKey(entityKey, fieldKey);
+    info.partial = !Boolean(isItInTheCache);
 
     const results: string[][] = fieldInfos.map(fi => {
       return cache.resolveFieldByKey(entityKey, fi.fieldKey) as string[]
