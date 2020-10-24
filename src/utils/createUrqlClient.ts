@@ -53,7 +53,6 @@ const cursorPagination = (): Resolver => {
 
       results.posts.push(...data)
     })
-    console.log({ results, _parent, fieldArgs, cache, info})
 
     return results
 
