@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { dedupExchange, Exchange, fetchExchange, stringifyVariables } from "urql";
 import { pipe, tap } from 'wonka';
 
-import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation } from '../generated/graphql';
+import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, PaginatedPosts } from '../generated/graphql';
 import { betterUpdateQuery } from "./betterUpdateQuery";
 
 export const errorExchange: Exchange = ({ forward }) => ops$ => {
@@ -33,11 +33,29 @@ const cursorPagination = (): Resolver => {
     const isItInTheCache = cache.resolveFieldByKey(entityKey, fieldKey);
     info.partial = !Boolean(isItInTheCache);
 
-    const results: string[][] = fieldInfos.map(fi => {
-      return cache.resolveFieldByKey(entityKey, fi.fieldKey) as string[]
-    })
+    interface PostsResult {
+      __typename: any;
+      hasMore: boolean;
+      posts: string[];
+    }
 
-    return results.flat();
+    const results: PostsResult = {
+      __typename: "PaginatedPosts",
+      hasMore: true,
+      posts: []
+    }
+
+    fieldInfos.forEach(fi => {
+      const key = cache.resolveFieldByKey(entityKey, fi.fieldKey) as string
+      const data = cache.resolve(key, 'posts') as string[]
+      const hasMore = Boolean(cache.resolve(key, 'hasMore'))
+      if (!hasMore) results.hasMore = hasMore;
+
+      results.posts.push(...data)
+    })
+    console.log({ results, _parent, fieldArgs, cache, info})
+
+    return results
 
     // const visited = new Set();
     // let result: NullArray<string> = [];
@@ -101,6 +119,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
   exchanges: [
     dedupExchange,
     cacheExchange({
+      keys: {
+        PaginatedPosts: () => null
+      },
       resolvers: {
         Query: {
           posts: cursorPagination(),

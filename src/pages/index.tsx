@@ -10,17 +10,20 @@ import { createUrqlClient } from '../utils/createUrqlClient';
 const Index = () => {
   const [variables, setVariables] = useState({
     limit: 10,
-    cursor: null as null | number
+    cursor: null as null | string
   })
 
   const [{ data, fetching }] = usePostsQuery({ variables });
 
   const handlePagination = useCallback(() => {
-    if (!data || fetching) return;
+    if (!data) {
+      console.log('not data')
+      return;
+    }
 
     setVariables({
       limit: variables.limit,
-      cursor: Number(data.posts[data?.posts.length - 1].createdAt)
+      cursor: data.posts.posts[data?.posts.posts.length - 1].createdAt
     })
   }, [])
 
@@ -32,11 +35,10 @@ const Index = () => {
           <Button background="#77cc22" ml="auto">Create Post</Button>
         </NextLink>
       </Flex>
-      {!data || fetching
-        ? <p>loading...</p>
-        : (
+      {data && !fetching
+        ? (
           <Stack spacing={8}>
-            {data.posts.map(post => (
+            {data!.posts.posts.map(post => (
               <header key={post.id}>
                 <Box p={5} shadow="md" borderWidth="1px" mb={8}>
                   <Heading fontSize="xl">{post.title}</Heading>
@@ -45,9 +47,18 @@ const Index = () => {
               </header>
             ))}
           </Stack>
-        )
+        ) : <p>loading...</p>
       }
-      {data && <Flex><Button m="auto" onClick={handlePagination}>Load more</Button></Flex>}
+      {data && data.posts.hasMore && (
+        <Flex>
+          <Button m="auto"
+            onClick={handlePagination}
+            isLoading={fetching}
+          >
+            Load more
+          </Button>
+        </Flex>
+      )}
     </Layout>
   )
 }

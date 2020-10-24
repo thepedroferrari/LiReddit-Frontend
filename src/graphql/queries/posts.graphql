@@ -1,8 +1,12 @@
-query Posts($limit: Int!, $cursor: Float) {
-  posts(cursor: $cursor, limit: $limit) {
-    id
-    title
-    excerpt
-    createdAt
+query Posts($limit: Int!, $cursor: String) {
+  posts(limit: $limit, cursor: $cursor) {
+    posts {
+      id
+      createdAt
+      updatedAt
+      title
+      excerpt
+    }
+    hasMore
   }
 }
