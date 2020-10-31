@@ -18,6 +18,11 @@ const Index = () => {
   });
 
   if (!fetching && !data) {
+    console.log({
+      fetching,
+      data,
+      variables
+    })
     return <div>you got query failed for some reason</div>;
   }
 
@@ -36,7 +41,11 @@ const Index = () => {
           <Stack spacing={8}>
             {data!.posts.posts.map((p) => (
               <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                <UpdootSection points={p.points} id={p.id} />
+                <UpdootSection
+                  points={p.points}
+                  id={p.id}
+                  voteStatus={p.voteStatus}
+                />
                 <Box>
                   <Heading fontSize="xl">{p.title}</Heading>
                   <Text>Posted by {p.author.username}</Text>
