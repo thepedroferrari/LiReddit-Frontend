@@ -47,7 +47,11 @@ const Index = () => {
                   voteStatus={p.voteStatus}
                 />
                 <Box>
-                  <Heading fontSize="xl">{p.title}</Heading>
+                  <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                  <Link>
+                    <Heading fontSize="xl">{p.title}</Heading>
+                    </Link>
+                  </NextLink>
                   <Text>Posted by {p.author.username}</Text>
                   <Text mt={4}>{p.excerpt}</Text>
                 </Box>
