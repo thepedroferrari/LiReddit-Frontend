@@ -2,13 +2,10 @@ import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 
 import { useMeQuery, useLogoutMutation } from '../generated/graphql';
-import { isServer } from '../utils/isServer';
 
 const NavBarBody = () => {
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
-  const [{ data, fetching }] = useMeQuery({
-    pause: isServer()
-  })
+  const [{ data, fetching }] = useMeQuery()
 
   return <Box ml={"auto"}>
     {fetching
