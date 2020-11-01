@@ -29,7 +29,8 @@ const Index = () => {
         <div>loading...</div>
       ) : (
           <Stack spacing={8}>
-            {data!.posts.posts.map((p) => (
+            {data!.posts.posts.map((p) =>
+              !p ? null : (
               <Flex
                 key={p.id}
                 p={5}
