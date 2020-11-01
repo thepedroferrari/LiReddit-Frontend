@@ -20,7 +20,16 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["components/*"],
+      "generated/*": ["generated/*"],
+      "graphql/*": ["graphql/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"],
+      "utils/*": ["utils/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

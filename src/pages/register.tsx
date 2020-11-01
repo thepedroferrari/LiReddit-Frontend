@@ -2,12 +2,12 @@ import { Box, Button } from '@chakra-ui/core';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
 
-import { Wrapper } from '../components/Wrapper';
-import { InputField } from '../components/InputField';
-import { useRegisterMutation } from '../generated/graphql';
-import { toErrorMap } from '../utils/toErrorMap';
+import { Wrapper } from 'components/Wrapper';
+import { InputField } from 'components/InputField';
+import { useRegisterMutation } from 'generated/graphql';
+import { toErrorMap } from 'utils/toErrorMap';
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../utils/createUrqlClient';
+import { createUrqlClient } from 'utils/createUrqlClient';
 
 const Register: React.FC = () => {
   const router = useRouter();

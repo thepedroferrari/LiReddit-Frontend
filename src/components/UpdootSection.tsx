@@ -1,5 +1,5 @@
 import { Flex, IconButton } from '@chakra-ui/core';
-import { PostSnippetFragment, useVoteMutation } from '../generated/graphql';
+import { PostSnippetFragment, useVoteMutation } from 'generated/graphql';
 
 interface UpdootSectionProps {
   id: PostSnippetFragment['id']

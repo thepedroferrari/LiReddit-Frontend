@@ -14,6 +14,8 @@ const CreatePost: React.FC = () => {
   useIsAuth();
 
   const [, createPost] = useCreatePostMutation();
+
+
   return (
     <Layout variant="small">
       <Formik

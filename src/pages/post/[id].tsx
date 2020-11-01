@@ -1,8 +1,8 @@
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from '../../utils/createUrqlClient';
+import { createUrqlClient } from 'utils/createUrqlClient';
 import { useRouter } from 'next/router';
-import { usePostQuery } from '../../generated/graphql';
-import { Layout } from '../../components/Layout';
+import { usePostQuery } from 'generated/graphql';
+import { Layout } from 'components/Layout';
 import { Box, Heading } from '@chakra-ui/core';
 
 const Post = () => {
