@@ -1,28 +1,46 @@
 import { Box, Button } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
-import { useRouter } from 'next/router';
 
 import { InputField } from 'components/InputField';
 import { Layout } from 'components/Layout';
-import { useCreatePostMutation } from 'generated/graphql';
-import { useIsAuth } from 'hooks/useIsAuth';
 import { createUrqlClient } from 'utils/createUrqlClient';
+import { useUpdatePostMutation, usePostQuery } from '../../../generated/graphql';
+import { useGetPostId } from '../../../utils/useGetPostId';
+import { useRouter } from 'next/router';
 
-const CreatePost: React.FC = () => {
+const EditPost: React.FC = () => {
   const router = useRouter();
-  useIsAuth();
+  const postId = useGetPostId();
+  const [{ data, fetching }] = usePostQuery({
+    pause: postId === -1,
+    variables: {
+      id: postId
+    }
+  });
+  const [, updatePost] = useUpdatePostMutation()
 
-  const [, createPost] = useCreatePostMutation();
+  if (fetching) return (
+    <Layout>
+      <div>Loading...</div>
+    </Layout>
+  )
 
+  if (!data?.post) return (
+    <Layout>
+      <div>Loading...</div>
+    </Layout>
+  )
+
+  const { title, text } = data.post;
 
   return (
     <Layout variant="small">
       <Formik
-        initialValues={{ title: "", text: "" }}
+        initialValues={{ title, text }}
         onSubmit={async (input) => {
-          const { error } = await createPost({ input });
-          if (!error) router.push('/');
+          await updatePost({ id: postId, ...input });
+          router.push(`/post/${postId}`)
         }}
       >
         {({ isSubmitting }) => (
@@ -49,7 +67,7 @@ const CreatePost: React.FC = () => {
               isLoading={isSubmitting}
               type="submit"
             >
-              Create Post
+              Update Post
             </Button>
           </Form>
         )}
@@ -58,4 +76,4 @@ const CreatePost: React.FC = () => {
   )
 }
 
-export default withUrqlClient(createUrqlClient)(CreatePost)
+export default withUrqlClient(createUrqlClient)(EditPost)
