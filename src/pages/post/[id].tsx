@@ -1,8 +1,9 @@
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '_/utils/createUrqlClient';
 import { Layout } from '_/components/Layout';
-import { Box, Heading } from '@chakra-ui/core';
+import { Box, Heading, Flex } from '@chakra-ui/core';
 import { useGetPostFromUrl } from '../../utils/useGetPostFromUrl';
+import EditDeletePostButtons from '_/components/EditDeletePostButtons';
 
 const Post = () => {
   const [{ data, fetching }] = useGetPostFromUrl();
@@ -23,10 +24,13 @@ const Post = () => {
     )
   }
 
-  const { title, author, text } = data.post;
+  const { title, author, text, id } = data.post;
 
   return (
     <Layout>
+      <Flex width="100px" mb={2} justifyContent="space-around" alignSelf="end" >
+        <EditDeletePostButtons id={id} authorId={author.id} />
+      </Flex>
       <Heading size="2xl">{title}</Heading>
       <Heading size="xs" mb={4}>By {author.username}</Heading>
       <Box p="10">
