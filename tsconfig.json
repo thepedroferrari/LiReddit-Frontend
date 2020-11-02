@@ -23,12 +23,12 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
-      "components/*": ["components/*"],
-      "generated/*": ["generated/*"],
-      "graphql/*": ["graphql/*"],
-      "hooks/*": ["hooks/*"],
-      "pages/*": ["pages/*"],
-      "utils/*": ["utils/*"]
+      "_/components/*": ["components/*"],
+      "_/generated/*": ["generated/*"],
+      "_/graphql/*": ["graphql/*"],
+      "_/hooks/*": ["hooks/*"],
+      "_/pages/*": ["pages/*"],
+      "_/utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

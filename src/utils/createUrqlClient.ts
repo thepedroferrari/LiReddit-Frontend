@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { dedupExchange, Exchange, fetchExchange, stringifyVariables } from "urql";
 import { pipe, tap } from 'wonka';
 
-import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, VoteMutationVariables, DeletePostMutationVariables } from 'generated/graphql';
+import { LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, VoteMutationVariables, DeletePostMutationVariables } from '_/generated/graphql';
 import { betterUpdateQuery } from "./betterUpdateQuery";
 import gql from 'graphql-tag';
 import { isServer } from './isServer';

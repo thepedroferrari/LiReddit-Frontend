@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
 
-import { InputField } from 'components/InputField';
-import { Wrapper } from 'components/Wrapper';
-import { useLoginMutation } from 'generated/graphql';
-import { toErrorMap } from 'utils/toErrorMap';
-import { createUrqlClient } from 'utils/createUrqlClient';
+import { InputField } from '_/components/InputField';
+import { Wrapper } from '_/components/Wrapper';
+import { useLoginMutation } from '_/generated/graphql';
+import { toErrorMap } from '_/utils/toErrorMap';
+import { createUrqlClient } from '_/utils/createUrqlClient';
 import NextLink from 'next/link';
 
 const Login: React.FC = () => {

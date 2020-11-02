@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 
-import { useMeQuery, useLogoutMutation } from 'generated/graphql';
+import { useMeQuery, useLogoutMutation } from '_/generated/graphql';
 
 const NavBarBody = () => {
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();

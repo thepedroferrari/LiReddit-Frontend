@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
 
-import { InputField } from 'components/InputField';
-import { Layout } from 'components/Layout';
-import { useCreatePostMutation } from 'generated/graphql';
-import { useIsAuth } from 'hooks/useIsAuth';
-import { createUrqlClient } from 'utils/createUrqlClient';
+import { InputField } from '_/components/InputField';
+import { Layout } from '_/components/Layout';
+import { useCreatePostMutation } from '_/generated/graphql';
+import { useIsAuth } from '_/hooks/useIsAuth';
+import { createUrqlClient } from '_/utils/createUrqlClient';
 
 const CreatePost: React.FC = () => {
   const router = useRouter();

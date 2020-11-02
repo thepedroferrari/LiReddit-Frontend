@@ -1,6 +1,6 @@
 import { withUrqlClient } from 'next-urql';
-import { createUrqlClient } from 'utils/createUrqlClient';
-import { Layout } from 'components/Layout';
+import { createUrqlClient } from '_/utils/createUrqlClient';
+import { Layout } from '_/components/Layout';
 import { Box, Heading } from '@chakra-ui/core';
 import { useGetPostFromUrl } from '../../utils/useGetPostFromUrl';
 

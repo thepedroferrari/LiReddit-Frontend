@@ -1,13 +1,13 @@
 import { Box, Button } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
-
-import { InputField } from 'components/InputField';
-import { Layout } from 'components/Layout';
-import { createUrqlClient } from 'utils/createUrqlClient';
-import { useUpdatePostMutation, usePostQuery } from '../../../generated/graphql';
-import { useGetPostId } from '../../../utils/useGetPostId';
 import { useRouter } from 'next/router';
+
+import { InputField } from '_/components/InputField';
+import { Layout } from '_/components/Layout';
+import { createUrqlClient } from '_/utils/createUrqlClient';
+import { usePostQuery, useUpdatePostMutation } from '../../../generated/graphql';
+import { useGetPostId } from '../../../utils/useGetPostId';
 
 const EditPost: React.FC = () => {
   const router = useRouter();
