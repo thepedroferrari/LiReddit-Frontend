@@ -2,10 +2,17 @@ import { Box, Button, Flex, Heading, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 
 import { useMeQuery, useLogoutMutation } from '_/generated/graphql';
+import { useRouter } from 'next/router';
 
 const NavBarBody = () => {
+  const router = useRouter()
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   const [{ data, fetching }] = useMeQuery()
+
+  const handleLogout = async () => {
+    await logout();
+    router.reload();
+  }
 
   return <Box ml={"auto"}>
     {fetching
@@ -29,7 +36,7 @@ const NavBarBody = () => {
             <Box mr={2}>{data.me.username}</Box>
             <Button
               variant="link"
-              onClick={() => { logout() }}
+              onClick={handleLogout}
               isLoading={logoutFetching}
             >
               Logout
